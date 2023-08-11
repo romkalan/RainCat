@@ -8,20 +8,37 @@
 import SpriteKit
 import GameplayKit
 
-class GameScene: SKScene {
+class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private var lastUpdateTime : TimeInterval = 0
     private var currentRainDropSpawnTime : TimeInterval = 0
     private var rainDropSpawnRate : TimeInterval = 0.5
     
+    private let background = BackgroundNode()
+    let raindropTexture = SKTexture(imageNamed: "rain_drop")
+    
     override func sceneDidLoad() {
+        
+        self.physicsWorld.contactDelegate = self
+        
+        var worldFrame = frame
+        worldFrame.origin.x -= 100
+        worldFrame.origin.y -= 100
+        worldFrame.size.height += 200
+        worldFrame.size.width += 200
+        
+        self.physicsBody = SKPhysicsBody(edgeLoopFrom: worldFrame)
+        self.physicsBody?.categoryBitMask = BitMaskCategory.world.rawValue
+        
         self.lastUpdateTime = 0
+        
+        background.setup(size: size)
+        addChild(background)
     }
     
     override func didMove(to view: SKView) {
         
     }
-    
     
     override func update(_ currentTime: TimeInterval) {
         // Called before each frame is rendered
@@ -37,7 +54,57 @@ class GameScene: SKScene {
         // Update the Spawn Timer
         currentRainDropSpawnTime += dt
 
+        if currentRainDropSpawnTime > rainDropSpawnRate {
+            currentRainDropSpawnTime = 0
+            spawnRaindrop()
+        }
 
         self.lastUpdateTime = currentTime
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+    }
+    
+    private func spawnRaindrop() {
+        let raindrop = SKSpriteNode(texture: raindropTexture)
+        
+        let xPosition = CGFloat(arc4random()).truncatingRemainder(dividingBy: size.width)
+        let yPosition = size.height + raindrop.size.height
+        raindrop.position = CGPoint(x: xPosition, y: yPosition)
+        
+        raindrop.physicsBody = SKPhysicsBody(texture: raindropTexture, size: raindrop.size)
+        raindrop.physicsBody?.categoryBitMask = BitMaskCategory.rain.rawValue
+        raindrop.physicsBody?.contactTestBitMask = BitMaskCategory.floor.rawValue | BitMaskCategory.world.rawValue
+        
+        addChild(raindrop)
+    }
+    
+}
+
+extension GameScene {
+    func didBegin(_ contact: SKPhysicsContact) {
+        let _ : BitMaskCategory = [
+                    contact.bodyA.category,
+                    contact.bodyB.category
+                ]
+        
+            if contact.bodyA.categoryBitMask == BitMaskCategory.rain.rawValue {
+                contact.bodyA.node?.physicsBody?.collisionBitMask = 0
+                contact.bodyA.node?.physicsBody?.categoryBitMask = 0
+            } else if contact.bodyB.categoryBitMask == BitMaskCategory.rain.rawValue {
+                contact.bodyB.node?.physicsBody?.collisionBitMask = 0
+                contact.bodyB.node?.physicsBody?.categoryBitMask = 0
+            }
+        
+        if contact.bodyA.categoryBitMask == BitMaskCategory.world.rawValue {
+              contact.bodyB.node?.removeFromParent()
+              contact.bodyB.node?.physicsBody = nil
+              contact.bodyB.node?.removeAllActions()
+            } else if contact.bodyB.categoryBitMask == BitMaskCategory.world.rawValue {
+              contact.bodyA.node?.removeFromParent()
+              contact.bodyA.node?.physicsBody = nil
+              contact.bodyA.node?.removeAllActions()
+            }
     }
 }
