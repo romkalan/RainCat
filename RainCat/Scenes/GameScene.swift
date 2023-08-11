@@ -10,9 +10,9 @@ import GameplayKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
-    private var lastUpdateTime : TimeInterval = 0
-    private var currentRainDropSpawnTime : TimeInterval = 0
-    private var rainDropSpawnRate : TimeInterval = 0.5
+    private var lastUpdateTime: TimeInterval = 0
+    private var currentRainDropSpawnTime: TimeInterval = 0
+    private var rainDropSpawnRate: TimeInterval = 0.5
     
     private let background = BackgroundNode()
     private var umbrella: UmbrellaSprite!
