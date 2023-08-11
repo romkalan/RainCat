@@ -37,7 +37,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         background.setup(size: size)
         addChild(background)
         
-        umbrella = UmbrellaSprite.populateUmbrella(at: CGPoint(x: frame.midX, y: frame.midY))
+        umbrella = UmbrellaSprite.populateUmbrella()
+        umbrella.updatePosition(point: CGPoint(x: frame.midX, y: frame.midY))
         addChild(umbrella)
     }
     
@@ -65,10 +66,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
 
         self.lastUpdateTime = currentTime
+        
+        umbrella.update(deltaTime: dt)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touchPoint = touches.first?.location(in: self)
         
+        if let point = touchPoint {
+            umbrella.setDestination(destination: point)
+        }
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touchPoint = touches.first?.location(in: self)
+        
+        if let point = touchPoint {
+            umbrella.setDestination(destination: point)
+        }
     }
     
     private func spawnRaindrop() {

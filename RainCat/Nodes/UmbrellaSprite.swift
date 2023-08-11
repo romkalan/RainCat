@@ -8,9 +8,11 @@
 import SpriteKit
 
 class UmbrellaSprite: SKSpriteNode {
-    static func populateUmbrella(at point: CGPoint) -> UmbrellaSprite {
+    private var destination: CGPoint!
+    private let easing: CGFloat = 0.1
+    
+    static func populateUmbrella() -> UmbrellaSprite {
         let umbrella = UmbrellaSprite(imageNamed: "umbrella")
-        umbrella.position = point
         umbrella.zPosition = 4
         
         let path = UIBezierPath()
@@ -18,11 +20,34 @@ class UmbrellaSprite: SKSpriteNode {
         path.addLine(to: CGPoint(x: -umbrella.size.width / 2 - 30, y: 0))
         path.addLine(to: CGPoint(x: 0, y: umbrella.size.height / 2))
         path.addLine(to: CGPoint(x: umbrella.size.width / 2 + 30, y: 0))
-
+        
         umbrella.physicsBody = SKPhysicsBody(polygonFrom: path.cgPath)
         umbrella.physicsBody?.isDynamic = false
         umbrella.physicsBody?.restitution = 0.9
         
         return umbrella
+    }
+    
+    public func setDestination(destination: CGPoint) {
+        self.destination = destination
+    }
+    
+    public func updatePosition(point : CGPoint) {
+        position = point
+        destination = point
+    }
+    
+    public func update(deltaTime: TimeInterval) {
+        let distance = sqrt(pow((destination.x - position.x), 2) + pow((destination.y - position.y), 2)) // Вычисляем гипотенузу по формуле Пифагора
+        
+        if distance > 1 {
+            let directionX = (destination.x - position.x)
+            let directionY = (destination.y - position.y)
+            
+            position.x += directionX * easing
+            position.y += directionY * easing
+        } else {
+            position = destination;
+        }
     }
 }
