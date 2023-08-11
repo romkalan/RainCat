@@ -15,6 +15,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var rainDropSpawnRate : TimeInterval = 0.5
     
     private let background = BackgroundNode()
+    private var umbrella: UmbrellaSprite!
+    
     let raindropTexture = SKTexture(imageNamed: "rain_drop")
     
     override func sceneDidLoad() {
@@ -34,6 +36,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         background.setup(size: size)
         addChild(background)
+        
+        umbrella = UmbrellaSprite.populateUmbrella(at: CGPoint(x: frame.midX, y: frame.midY))
+        addChild(umbrella)
     }
     
     override func didMove(to view: SKView) {
@@ -72,6 +77,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let xPosition = CGFloat(arc4random()).truncatingRemainder(dividingBy: size.width)
         let yPosition = size.height + raindrop.size.height
         raindrop.position = CGPoint(x: xPosition, y: yPosition)
+        raindrop.zPosition = 2
         
         raindrop.physicsBody = SKPhysicsBody(texture: raindropTexture, size: raindrop.size)
         raindrop.physicsBody?.categoryBitMask = BitMaskCategory.rain.rawValue
@@ -84,27 +90,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
 extension GameScene {
     func didBegin(_ contact: SKPhysicsContact) {
-        let _ : BitMaskCategory = [
-                    contact.bodyA.category,
-                    contact.bodyB.category
-                ]
         
-            if contact.bodyA.categoryBitMask == BitMaskCategory.rain.rawValue {
-                contact.bodyA.node?.physicsBody?.collisionBitMask = 0
-                contact.bodyA.node?.physicsBody?.categoryBitMask = 0
-            } else if contact.bodyB.categoryBitMask == BitMaskCategory.rain.rawValue {
-                contact.bodyB.node?.physicsBody?.collisionBitMask = 0
-                contact.bodyB.node?.physicsBody?.categoryBitMask = 0
-            }
+        if contact.bodyA.categoryBitMask == BitMaskCategory.rain.rawValue {
+            contact.bodyA.node?.physicsBody?.collisionBitMask = 0
+            contact.bodyA.node?.physicsBody?.categoryBitMask = 0
+        } else if contact.bodyB.categoryBitMask == BitMaskCategory.rain.rawValue {
+            contact.bodyB.node?.physicsBody?.collisionBitMask = 0
+            contact.bodyB.node?.physicsBody?.categoryBitMask = 0
+        }
         
         if contact.bodyA.categoryBitMask == BitMaskCategory.world.rawValue {
-              contact.bodyB.node?.removeFromParent()
-              contact.bodyB.node?.physicsBody = nil
-              contact.bodyB.node?.removeAllActions()
-            } else if contact.bodyB.categoryBitMask == BitMaskCategory.world.rawValue {
-              contact.bodyA.node?.removeFromParent()
-              contact.bodyA.node?.physicsBody = nil
-              contact.bodyA.node?.removeAllActions()
-            }
+            contact.bodyB.node?.removeFromParent()
+            contact.bodyB.node?.physicsBody = nil
+            contact.bodyB.node?.removeAllActions()
+        } else if contact.bodyB.categoryBitMask == BitMaskCategory.world.rawValue {
+            contact.bodyA.node?.removeFromParent()
+            contact.bodyA.node?.physicsBody = nil
+            contact.bodyA.node?.removeAllActions()
+        }
     }
 }

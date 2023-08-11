@@ -15,6 +15,7 @@
 		ADFEB0C52A861B9E00385C3F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADFEB0C32A861B9E00385C3F /* LaunchScreen.storyboard */; };
 		ADFEB0D12A8633A200385C3F /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFEB0D02A8633A200385C3F /* Background.swift */; };
 		ADFEB0D42A86462000385C3F /* BitMaskCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFEB0D32A86462000385C3F /* BitMaskCategory.swift */; };
+		ADFEB0D62A86566400385C3F /* UmbrellaSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFEB0D52A86566400385C3F /* UmbrellaSprite.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		ADFEB0C42A861B9E00385C3F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ADFEB0D02A8633A200385C3F /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
 		ADFEB0D32A86462000385C3F /* BitMaskCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BitMaskCategory.swift; sourceTree = "<group>"; };
+		ADFEB0D52A86566400385C3F /* UmbrellaSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UmbrellaSprite.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				ADFEB0D02A8633A200385C3F /* Background.swift */,
+				ADFEB0D52A86566400385C3F /* UmbrellaSprite.swift */,
 			);
 			path = Nodes;
 			sourceTree = "<group>";
@@ -190,6 +193,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADFEB0D62A86566400385C3F /* UmbrellaSprite.swift in Sources */,
 				ADFEB0BB2A861B9D00385C3F /* GameScene.swift in Sources */,
 				ADFEB0BD2A861B9D00385C3F /* GameViewController.swift in Sources */,
 				ADFEB0D42A86462000385C3F /* BitMaskCategory.swift in Sources */,
