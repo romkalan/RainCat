@@ -153,30 +153,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             foodBody = contact.bodyB
         }
         
-        if otherBody.categoryBitMask == BitMaskCategory.cat.rawValue {
+        switch otherBody.categoryBitMask {
+        case BitMaskCategory.cat.rawValue:
             print("fed cat")
+
+            fallthrough
+        case BitMaskCategory.world.rawValue:
             foodBody.node?.removeFromParent()
             foodBody.node?.physicsBody = nil
+
             spawnFood()
-        } else if otherBody.categoryBitMask == BitMaskCategory.world.rawValue {
-            foodBody.node?.removeFromParent()
-            foodBody.node?.physicsBody = nil
-            spawnFood()
+        default:
+            print("something else touches the food")
         }
-        
-//        switch otherBody.categoryBitMask {
-//        case BitMaskCategory.cat.rawValue:
-//            print("fed cat")
-//
-//            fallthrough
-//        case BitMaskCategory.world.rawValue:
-//            foodBody.node?.removeFromParent()
-//            foodBody.node?.physicsBody = nil
-//
-//            spawnFood()
-//        default:
-//            print("something else touches the food")
-//        }
     }
     
     private func handleCatCollision(contact: SKPhysicsContact) {
@@ -213,14 +202,14 @@ extension GameScene {
             contact.bodyB.node?.physicsBody?.categoryBitMask = 0
         }
         
-        if contact.bodyA.categoryBitMask == BitMaskCategory.cat.rawValue || contact.bodyB.categoryBitMask == BitMaskCategory.cat.rawValue {
-            handleCatCollision(contact: contact)
+        if contact.bodyA.categoryBitMask == BitMaskCategory.food.rawValue || contact.bodyB.categoryBitMask == BitMaskCategory.food.rawValue {
+            handleFoodHit(contact: contact)
             
             return
         }
         
-        if contact.bodyA.categoryBitMask == BitMaskCategory.food.rawValue || contact.bodyB.categoryBitMask == BitMaskCategory.food.rawValue {
-            handleFoodHit(contact: contact)
+        if contact.bodyA.categoryBitMask == BitMaskCategory.cat.rawValue || contact.bodyB.categoryBitMask == BitMaskCategory.cat.rawValue {
+            handleCatCollision(contact: contact)
             
             return
         }
