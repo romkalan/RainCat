@@ -8,6 +8,8 @@
 import SpriteKit
 
 class CatSprite: SKSpriteNode {
+    private let movementSpeed: CGFloat = 100
+    
     static func populateCat() -> CatSprite {
         let catSprite = CatSprite(imageNamed: "cat_one")
         
@@ -19,7 +21,15 @@ class CatSprite: SKSpriteNode {
         return catSprite
     }
     
-    public func update(deltaTime: TimeInterval) {
-        
+    public func update(deltaTime: TimeInterval, foodLocation: CGPoint) {
+        if foodLocation.x < position.x {
+            //Food is left
+            position.x -= movementSpeed * CGFloat(deltaTime)
+            xScale = -1 // редактируем ширину спрайта (отзеракаливаем его)
+        } else {
+            //Food is right
+            position.x += movementSpeed * CGFloat(deltaTime)
+            xScale = 1 // редактируем ширину спрайта (отзеркаливаем если у нас было -1)
+        }
     }
 }

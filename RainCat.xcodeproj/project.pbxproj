@@ -28,6 +28,7 @@
 		ADFEB0EE2A876A0300385C3F /* cat_meow_4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ADFEB0E32A876A0200385C3F /* cat_meow_4.mp3 */; };
 		ADFEB0EF2A876A0300385C3F /* cat_meow_7.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ADFEB0E42A876A0200385C3F /* cat_meow_7.mp3 */; };
 		ADFEB0F12A876A5300385C3F /* CatSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFEB0F02A876A5300385C3F /* CatSprite.swift */; };
+		ADFEB0F42A87A15100385C3F /* FoodSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFEB0F32A87A15100385C3F /* FoodSprite.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,7 @@
 		ADFEB0E32A876A0200385C3F /* cat_meow_4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = cat_meow_4.mp3; sourceTree = "<group>"; };
 		ADFEB0E42A876A0200385C3F /* cat_meow_7.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = cat_meow_7.mp3; sourceTree = "<group>"; };
 		ADFEB0F02A876A5300385C3F /* CatSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatSprite.swift; sourceTree = "<group>"; };
+		ADFEB0F32A87A15100385C3F /* FoodSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodSprite.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +155,7 @@
 			children = (
 				ADFEB0D52A86566400385C3F /* UmbrellaSprite.swift */,
 				ADFEB0F02A876A5300385C3F /* CatSprite.swift */,
+				ADFEB0F32A87A15100385C3F /* FoodSprite.swift */,
 			);
 			path = Sprites;
 			sourceTree = "<group>";
@@ -274,6 +277,7 @@
 			files = (
 				ADFEB0D62A86566400385C3F /* UmbrellaSprite.swift in Sources */,
 				ADFEB0F12A876A5300385C3F /* CatSprite.swift in Sources */,
+				ADFEB0F42A87A15100385C3F /* FoodSprite.swift in Sources */,
 				ADFEB0BB2A861B9D00385C3F /* GameScene.swift in Sources */,
 				ADFEB0BD2A861B9D00385C3F /* GameViewController.swift in Sources */,
 				ADFEB0D42A86462000385C3F /* BitMaskCategory.swift in Sources */,

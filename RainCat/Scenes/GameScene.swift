@@ -17,6 +17,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private let background = BackgroundNode()
     private var umbrella: UmbrellaSprite!
     private var cat: CatSprite!
+    private var food: FoodSprite!
+    private let foodEdgeMargin: CGFloat = 75.0
     
     let raindropTexture = SKTexture(imageNamed: "rain_drop")
     
@@ -43,6 +45,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(umbrella)
         
         spawnCat()
+        spawnFood()
     }
     
     override func didMove(to view: SKView) {
@@ -71,6 +74,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.lastUpdateTime = currentTime
         
         umbrella.update(deltaTime: dt)
+        cat.update(deltaTime: dt, foodLocation: food.position)
     }
     
     // Touches movement
@@ -89,6 +93,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             umbrella.setDestination(destination: point)
         }
     }
+    
     // Spawn objects
     private func spawnRaindrop() {
         let raindrop = SKSpriteNode(texture: raindropTexture)
@@ -105,6 +110,23 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(raindrop)
     }
     
+    private func spawnFood() {
+        if let currentFood = food, children.contains(currentFood) {
+            food.removeFromParent()
+            food.removeAllActions()
+            food.physicsBody = nil
+        }
+        
+        food = FoodSprite.populateFood()
+        var randomPosition = CGFloat(arc4random()) // получаем случайное значением
+        randomPosition = randomPosition.truncatingRemainder(dividingBy: size.width - foodEdgeMargin * 2) // ограничиваем случайное значение размером ширины экрана и вычисляем из этого значения foodEdgeMargin * 2
+        randomPosition += foodEdgeMargin // смещаем начало на отступ
+        
+        food.position = CGPoint(x: randomPosition, y: size.height)
+        
+        addChild(food)
+    }
+    
     private func spawnCat() {
         if let currentCat = cat, children.contains(currentCat) {
             cat.removeFromParent()
@@ -116,6 +138,33 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         cat.position = CGPoint(x: umbrella.position.x, y: umbrella.position.y - 30)
         
         addChild(cat)
+    }
+    
+    private func handleFoodHit(contact: SKPhysicsContact) {
+        var otherBody: SKPhysicsBody
+        var foodBody: SKPhysicsBody
+        
+        if contact.bodyA.categoryBitMask == BitMaskCategory.food.rawValue {
+            otherBody = contact.bodyB
+            foodBody = contact.bodyA
+        } else {
+            otherBody = contact.bodyA
+            foodBody = contact.bodyB
+        }
+        
+        switch otherBody.categoryBitMask {
+        case BitMaskCategory.cat.rawValue:
+            print("fed cat")
+            
+            fallthrough
+        case BitMaskCategory.world.rawValue:
+            foodBody.node?.removeFromParent()
+            foodBody.node?.physicsBody = nil
+            
+            spawnFood()
+        default:
+            print("something else touches the food")
+        }
     }
     
     private func handleCatCollision(contact: SKPhysicsContact) {
@@ -155,6 +204,13 @@ extension GameScene {
         if contact.bodyA.categoryBitMask == BitMaskCategory.cat.rawValue
             || contact.bodyB.categoryBitMask == BitMaskCategory.cat.rawValue {
             handleCatCollision(contact: contact)
+            
+            return
+        }
+        
+        if contact.bodyA.categoryBitMask == BitMaskCategory.food.rawValue
+            || contact.bodyB.categoryBitMask == BitMaskCategory.food.rawValue {
+            handleFoodHit(contact: contact)
             
             return
         }
