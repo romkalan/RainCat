@@ -16,7 +16,7 @@ class CatSprite: SKSpriteNode {
         catSprite.zPosition = 5
         catSprite.physicsBody = SKPhysicsBody(circleOfRadius: catSprite.size.width / 2)
         catSprite.physicsBody?.categoryBitMask = BitMaskCategory.cat.rawValue
-        catSprite.physicsBody?.contactTestBitMask = BitMaskCategory.rain.rawValue | BitMaskCategory.world.rawValue
+        catSprite.physicsBody?.contactTestBitMask = BitMaskCategory.rain.rawValue | BitMaskCategory.world.rawValue | BitMaskCategory.food.rawValue
         
         return catSprite
     }

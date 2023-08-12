@@ -14,9 +14,7 @@ class FoodSprite: SKSpriteNode {
         
         food.physicsBody = SKPhysicsBody(rectangleOf: food.size)
         food.physicsBody?.categoryBitMask = BitMaskCategory.food.rawValue
-        food.physicsBody?.contactTestBitMask = BitMaskCategory.rain.rawValue
-        | BitMaskCategory.cat.rawValue
-        | BitMaskCategory.world.rawValue
+        food.physicsBody?.contactTestBitMask = BitMaskCategory.rain.rawValue | BitMaskCategory.cat.rawValue | BitMaskCategory.world.rawValue
         
         return food
     }
