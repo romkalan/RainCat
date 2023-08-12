@@ -26,6 +26,7 @@ struct BitMaskCategory: OptionSet {
     static let world = BitMaskCategory(rawValue: 1 << 0)
     static let rain = BitMaskCategory(rawValue: 1 << 1)
     static let floor = BitMaskCategory(rawValue: 1 << 2)
+    static let cat = BitMaskCategory(rawValue: 1 << 3)
     static let all = BitMaskCategory(rawValue: UInt32.max)
 
 }

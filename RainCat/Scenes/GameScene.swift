@@ -16,6 +16,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     private let background = BackgroundNode()
     private var umbrella: UmbrellaSprite!
+    private var cat: CatSprite!
     
     let raindropTexture = SKTexture(imageNamed: "rain_drop")
     
@@ -40,6 +41,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         umbrella = UmbrellaSprite.populateUmbrella()
         umbrella.updatePosition(point: CGPoint(x: frame.midX, y: frame.midY))
         addChild(umbrella)
+        
+        spawnCat()
     }
     
     override func didMove(to view: SKView) {
@@ -70,6 +73,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         umbrella.update(deltaTime: dt)
     }
     
+    // Touches movement
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touchPoint = touches.first?.location(in: self)
         
@@ -85,7 +89,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             umbrella.setDestination(destination: point)
         }
     }
-    
+    // Spawn objects
     private func spawnRaindrop() {
         let raindrop = SKSpriteNode(texture: raindropTexture)
         
@@ -99,6 +103,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         raindrop.physicsBody?.contactTestBitMask = BitMaskCategory.floor.rawValue | BitMaskCategory.world.rawValue
         
         addChild(raindrop)
+    }
+    
+    private func spawnCat() {
+        if let currentCat = cat, children.contains(currentCat) {
+            cat.removeFromParent()
+            cat.removeAllActions()
+            cat.physicsBody = nil
+        }
+        
+        cat = CatSprite.populateCat()
+        cat.position = CGPoint(x: umbrella.position.x, y: umbrella.position.y - 30)
+        
+        addChild(cat)
     }
     
 }
