@@ -118,6 +118,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addChild(cat)
     }
     
+    private func handleCatCollision(contact: SKPhysicsContact) {
+        var otherBody: SKPhysicsBody
+        
+        // ищем другое физическое тело которое сконтактировало с кошкой
+        if contact.bodyA.categoryBitMask == BitMaskCategory.cat.rawValue {
+            otherBody = contact.bodyB
+        } else {
+            otherBody = contact.bodyA
+        }
+        
+        // прописываем логику что будет при контакте другого тела с кошкой в зависимости что за другое тело
+        switch otherBody.categoryBitMask {
+        case BitMaskCategory.rain.rawValue:
+            print("rain hit the cat")
+        case BitMaskCategory.world.rawValue:
+            spawnCat()
+        default:
+            print("something hit the cat")
+        }
+    }
+    
 }
 
 extension GameScene {
@@ -129,6 +150,13 @@ extension GameScene {
         } else if contact.bodyB.categoryBitMask == BitMaskCategory.rain.rawValue {
             contact.bodyB.node?.physicsBody?.collisionBitMask = 0
             contact.bodyB.node?.physicsBody?.categoryBitMask = 0
+        }
+        
+        if contact.bodyA.categoryBitMask == BitMaskCategory.cat.rawValue
+            || contact.bodyB.categoryBitMask == BitMaskCategory.cat.rawValue {
+            handleCatCollision(contact: contact)
+            
+            return
         }
         
         if contact.bodyA.categoryBitMask == BitMaskCategory.world.rawValue {
