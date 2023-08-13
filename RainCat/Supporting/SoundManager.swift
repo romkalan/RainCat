@@ -17,7 +17,7 @@ class SoundManager: NSObject, AVAudioPlayerDelegate {
     static let tracks = [
         "bensound-clearday",
         "bensound-jazzcomedy",
-        "bensound-jazzfrenchy",
+        "bensound-jazzyfrenchy",
         "bensound-littleidea"
     ]
     

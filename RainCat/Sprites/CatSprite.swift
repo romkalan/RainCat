@@ -35,6 +35,7 @@ class CatSprite: SKSpriteNode {
         let catSprite = CatSprite(imageNamed: "cat_one")
         
         catSprite.zPosition = 5
+        
         catSprite.physicsBody = SKPhysicsBody(circleOfRadius: catSprite.size.width / 2)
         catSprite.physicsBody?.categoryBitMask = BitMaskCategory.cat.rawValue
         catSprite.physicsBody?.contactTestBitMask = BitMaskCategory.rain.rawValue | BitMaskCategory.world.rawValue | BitMaskCategory.food.rawValue
@@ -56,8 +57,8 @@ class CatSprite: SKSpriteNode {
                 run(walkingAction, withKey: walkingActionKey)
             }
             
-            if zRotation != 0 && action(forKey: "action_rotate") == nil {
-                run(SKAction.rotate(byAngle: 0, duration: 0.25), withKey: "action_rotate")
+            if self.zRotation != 0 && action(forKey: "action_rotate") == nil {
+                run(SKAction.rotate(toAngle: 0, duration: 0.25), withKey: "action_rotate")
             }
             
             if foodLocation.y > position.y && abs(foodLocation.x - position.x) < 2 {

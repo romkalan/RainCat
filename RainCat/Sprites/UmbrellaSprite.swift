@@ -14,6 +14,7 @@ class UmbrellaSprite: SKSpriteNode {
     static func populateUmbrella() -> UmbrellaSprite {
         let umbrella = UmbrellaSprite(imageNamed: "umbrella")
         umbrella.zPosition = 4
+        umbrella.setScale(0.7)
         
         let path = UIBezierPath()
         path.move(to: CGPoint())
