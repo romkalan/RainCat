@@ -105,6 +105,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         raindrop.zPosition = 2
         
         raindrop.physicsBody = SKPhysicsBody(texture: raindropTexture, size: raindrop.size)
+        raindrop.physicsBody?.density = 0.5 // уменьшим плотность с 1 до 0.5
         raindrop.physicsBody?.categoryBitMask = BitMaskCategory.rain.rawValue
         raindrop.physicsBody?.contactTestBitMask = BitMaskCategory.floor.rawValue | BitMaskCategory.world.rawValue
         
@@ -181,7 +182,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // прописываем логику что будет при контакте другого тела с кошкой в зависимости что за другое тело
         switch otherBody.categoryBitMask {
         case BitMaskCategory.rain.rawValue:
-            print("rain hit the cat")
+            cat.hitByRain()
         case BitMaskCategory.world.rawValue:
             spawnCat()
         default:
