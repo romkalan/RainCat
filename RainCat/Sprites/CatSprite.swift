@@ -10,12 +10,25 @@ import SpriteKit
 class CatSprite: SKSpriteNode {
     private let walkingActionKey = "walking"
     private let movementSpeed: CGFloat = 100
+    
     private var timeSinceLastHit : TimeInterval = 2
     private let maxFlailTime : TimeInterval = 2
+    
+    private var currentRainHits = 4 // счетчик количества ударов по кошке
+    private let maxRainHits = 4 // количество ударов до мяуканья
     
     private let walkTextureAtlas = [
         SKTexture(imageNamed: "cat_one"),
         SKTexture(imageNamed: "cat_two")
+    ]
+    
+    private let meowSFX = [
+        "cat_meow_1.mp3",
+        "cat_meow_2.mp3",
+        "cat_meow_3.mp3",
+        "cat_meow_4.mp3",
+        "cat_meow_5.mp3",
+        "cat_meow_6.mp3"
     ]
     
     static func populateCat() -> CatSprite {
@@ -68,5 +81,18 @@ class CatSprite: SKSpriteNode {
     public func hitByRain() {
         timeSinceLastHit = 0
         removeAction(forKey: walkingActionKey)
+        
+        if currentRainHits < maxRainHits {
+            currentRainHits += 1
+            
+            return
+        }
+        
+        if action(forKey: "action_sound_effect") == nil {
+            currentRainHits = 0
+            
+            let selectedSFX = Int(arc4random_uniform(UInt32(meowSFX.count))) // выбираем случайное число от 0 до максимального числа из массива
+            run(SKAction.playSoundFileNamed(meowSFX[selectedSFX], waitForCompletion: true), withKey: "action_sound_effect")
+        }
     }
 }
