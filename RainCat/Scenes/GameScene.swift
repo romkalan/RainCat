@@ -56,12 +56,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         // Called before each frame is rendered
 
         // Initialize _lastUpdateTime if it has not already been
-        if (self.lastUpdateTime == 0) {
+        if self.lastUpdateTime == 0 {
           self.lastUpdateTime = currentTime
         }
 
         // Calculate time since last update
         let dt = currentTime - self.lastUpdateTime
+        
+        umbrella.update(deltaTime: dt)
+        cat.update(deltaTime: dt, foodLocation: food.position)
 
         // Update the Spawn Timer
         currentRainDropSpawnTime += dt
@@ -73,8 +76,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
         self.lastUpdateTime = currentTime
         
-        umbrella.update(deltaTime: dt)
-        cat.update(deltaTime: dt, foodLocation: food.position)
     }
     
     // Touches movement
@@ -197,10 +198,10 @@ extension GameScene {
         
         if contact.bodyA.categoryBitMask == BitMaskCategory.rain.rawValue {
             contact.bodyA.node?.physicsBody?.collisionBitMask = 0
-            contact.bodyA.node?.physicsBody?.categoryBitMask = 0
+//            contact.bodyA.node?.physicsBody?.categoryBitMask = 0
         } else if contact.bodyB.categoryBitMask == BitMaskCategory.rain.rawValue {
             contact.bodyB.node?.physicsBody?.collisionBitMask = 0
-            contact.bodyB.node?.physicsBody?.categoryBitMask = 0
+//            contact.bodyB.node?.physicsBody?.categoryBitMask = 0
         }
         
         if contact.bodyA.categoryBitMask == BitMaskCategory.food.rawValue || contact.bodyB.categoryBitMask == BitMaskCategory.food.rawValue {
