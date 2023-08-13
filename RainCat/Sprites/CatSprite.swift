@@ -8,7 +8,13 @@
 import SpriteKit
 
 class CatSprite: SKSpriteNode {
+    private let walkingActionKey = "walking"
     private let movementSpeed: CGFloat = 100
+    
+    private let walkTextureAtlas = [
+        SKTexture(imageNamed: "cat_one"),
+        SKTexture(imageNamed: "cat_two")
+    ]
     
     static func populateCat() -> CatSprite {
         let catSprite = CatSprite(imageNamed: "cat_one")
@@ -22,6 +28,16 @@ class CatSprite: SKSpriteNode {
     }
     
     public func update(deltaTime: TimeInterval, foodLocation: CGPoint) {
+        if action(forKey: "walking") == nil {
+            let walkingAction = SKAction.repeatForever(SKAction.animate(
+                with: walkTextureAtlas,
+                timePerFrame: 0.1,
+                resize: false,
+                restore: true)
+            )
+            run(walkingAction, withKey: "walking")
+        }
+        
         if foodLocation.x < position.x {
             //Food is left
             position.x -= movementSpeed * CGFloat(deltaTime)
