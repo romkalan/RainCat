@@ -14,6 +14,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     private var currentRainDropSpawnTime: TimeInterval = 0
     private var rainDropSpawnRate: TimeInterval = 0.5
     
+    private let hud = HUD()
+    
     private let background = BackgroundNode()
     private var umbrella: UmbrellaSprite!
     private var cat: CatSprite!
@@ -24,12 +26,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func sceneDidLoad() {
         
-        let label = SKLabelNode(fontNamed: "Pixel Digivolve")
-        label.text = "Hello World!"
-        label.position = CGPoint(x: size.width / 2, y: size.height / 2)
-        label.zPosition = 1000
-        label.fontSize = 50
-        addChild(label)
+        hud.setup(size: size)
+        addChild(hud)
         
         self.physicsWorld.contactDelegate = self
         
@@ -142,6 +140,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             cat.removeFromParent()
             cat.removeAllActions()
             cat.physicsBody = nil
+            
+            hud.resetPoints()
         }
         
         cat = CatSprite.populateCat()
@@ -164,8 +164,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         switch otherBody.categoryBitMask {
         case BitMaskCategory.cat.rawValue:
-            print("fed cat")
-
+            hud.addPoint()
             fallthrough
         case BitMaskCategory.world.rawValue:
             foodBody.node?.removeFromParent()
@@ -191,6 +190,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         switch otherBody.categoryBitMask {
         case BitMaskCategory.rain.rawValue:
             cat.hitByRain()
+            hud.resetPoints()
         case BitMaskCategory.world.rawValue:
             spawnCat()
         default:

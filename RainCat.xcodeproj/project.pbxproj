@@ -32,6 +32,7 @@
 		ADFEB0F62A88BEC900385C3F /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFEB0F52A88BEC900385C3F /* SoundManager.swift */; };
 		ADFEB0FB2A8A19BD00385C3F /* Pixel Digivolve.otf in Resources */ = {isa = PBXBuildFile; fileRef = ADFEB0F82A8A151D00385C3F /* Pixel Digivolve.otf */; };
 		ADFEB0FC2A8A19CF00385C3F /* Pixel Digivolve Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = ADFEB0F92A8A152A00385C3F /* Pixel Digivolve Italic.otf */; };
+		ADFEB0FF2A8A1D6900385C3F /* HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFEB0FE2A8A1D6900385C3F /* HUD.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		ADFEB0F82A8A151D00385C3F /* Pixel Digivolve.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pixel Digivolve.otf"; sourceTree = "<group>"; };
 		ADFEB0F92A8A152A00385C3F /* Pixel Digivolve Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pixel Digivolve Italic.otf"; sourceTree = "<group>"; };
 		ADFEB0FD2A8A1A9400385C3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		ADFEB0FE2A8A1D6900385C3F /* HUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUD.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				ADFEB0F52A88BEC900385C3F /* SoundManager.swift */,
+				ADFEB0FE2A8A1D6900385C3F /* HUD.swift */,
 			);
 			path = Supporting;
 			sourceTree = "<group>";
@@ -297,6 +300,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ADFEB0D62A86566400385C3F /* UmbrellaSprite.swift in Sources */,
+				ADFEB0FF2A8A1D6900385C3F /* HUD.swift in Sources */,
 				ADFEB0F12A876A5300385C3F /* CatSprite.swift in Sources */,
 				ADFEB0F42A87A15100385C3F /* FoodSprite.swift in Sources */,
 				ADFEB0BB2A861B9D00385C3F /* GameScene.swift in Sources */,
