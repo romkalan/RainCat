@@ -24,6 +24,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     override func sceneDidLoad() {
         
+        let label = SKLabelNode(fontNamed: "Pixel Digivolve")
+        label.text = "Hello World!"
+        label.position = CGPoint(x: size.width / 2, y: size.height / 2)
+        label.zPosition = 1000
+        label.fontSize = 50
+        addChild(label)
+        
         self.physicsWorld.contactDelegate = self
         
         var worldFrame = frame

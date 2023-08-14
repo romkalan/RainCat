@@ -30,6 +30,8 @@
 		ADFEB0F12A876A5300385C3F /* CatSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFEB0F02A876A5300385C3F /* CatSprite.swift */; };
 		ADFEB0F42A87A15100385C3F /* FoodSprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFEB0F32A87A15100385C3F /* FoodSprite.swift */; };
 		ADFEB0F62A88BEC900385C3F /* SoundManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADFEB0F52A88BEC900385C3F /* SoundManager.swift */; };
+		ADFEB0FB2A8A19BD00385C3F /* Pixel Digivolve.otf in Resources */ = {isa = PBXBuildFile; fileRef = ADFEB0F82A8A151D00385C3F /* Pixel Digivolve.otf */; };
+		ADFEB0FC2A8A19CF00385C3F /* Pixel Digivolve Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = ADFEB0F92A8A152A00385C3F /* Pixel Digivolve Italic.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +59,9 @@
 		ADFEB0F02A876A5300385C3F /* CatSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatSprite.swift; sourceTree = "<group>"; };
 		ADFEB0F32A87A15100385C3F /* FoodSprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodSprite.swift; sourceTree = "<group>"; };
 		ADFEB0F52A88BEC900385C3F /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
+		ADFEB0F82A8A151D00385C3F /* Pixel Digivolve.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pixel Digivolve.otf"; sourceTree = "<group>"; };
+		ADFEB0F92A8A152A00385C3F /* Pixel Digivolve Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pixel Digivolve Italic.otf"; sourceTree = "<group>"; };
+		ADFEB0FD2A8A1A9400385C3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +94,7 @@
 		ADFEB0B32A861B9D00385C3F /* RainCat */ = {
 			isa = PBXGroup;
 			children = (
+				ADFEB0FD2A8A1A9400385C3F /* Info.plist */,
 				ADFEB0CD2A86337800385C3F /* App */,
 				ADFEB0CF2A86338900385C3F /* Scenes */,
 				ADFEB0D72A866EE100385C3F /* Sprites */,
@@ -129,6 +135,7 @@
 		ADFEB0CE2A86338000385C3F /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				ADFEB0FA2A8A160700385C3F /* Fonts */,
 				ADFEB0D82A876A0200385C3F /* Music */,
 				ADFEB0DD2A876A0200385C3F /* SFX */,
 				ADFEB0C12A861B9E00385C3F /* Assets.xcassets */,
@@ -196,6 +203,15 @@
 			path = Supporting;
 			sourceTree = "<group>";
 		};
+		ADFEB0FA2A8A160700385C3F /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				ADFEB0F92A8A152A00385C3F /* Pixel Digivolve Italic.otf */,
+				ADFEB0F82A8A151D00385C3F /* Pixel Digivolve.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -256,6 +272,7 @@
 			files = (
 				ADFEB0C02A861B9D00385C3F /* Main.storyboard in Resources */,
 				ADFEB0E62A876A0300385C3F /* bensound-clearday.mp3 in Resources */,
+				ADFEB0FC2A8A19CF00385C3F /* Pixel Digivolve Italic.otf in Resources */,
 				ADFEB0E52A876A0300385C3F /* bensound-littleidea.mp3 in Resources */,
 				ADFEB0C22A861B9E00385C3F /* Assets.xcassets in Resources */,
 				ADFEB0E72A876A0300385C3F /* bensound-jazzcomedy.mp3 in Resources */,
@@ -264,6 +281,7 @@
 				ADFEB0C52A861B9E00385C3F /* LaunchScreen.storyboard in Resources */,
 				ADFEB0EB2A876A0300385C3F /* cat_meow_3.mp3 in Resources */,
 				ADFEB0EF2A876A0300385C3F /* cat_meow_7.mp3 in Resources */,
+				ADFEB0FB2A8A19BD00385C3F /* Pixel Digivolve.otf in Resources */,
 				ADFEB0EC2A876A0300385C3F /* cat_meow_2.mp3 in Resources */,
 				ADFEB0EA2A876A0300385C3F /* cat_meow_6.wav in Resources */,
 				ADFEB0E82A876A0300385C3F /* bensound-jazzyfrenchy.mp3 in Resources */,
@@ -435,6 +453,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = CKY7SLNY4G;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RainCat/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -464,6 +483,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = CKY7SLNY4G;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = RainCat/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
