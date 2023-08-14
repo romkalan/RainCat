@@ -24,7 +24,7 @@ class HUD: SKNode {
         
         scoreLabel.text = "\(score)"
         scoreLabel.fontSize = 70
-        scoreLabel.position = CGPoint(x: size.width / 2, y: size.height - 100)
+        scoreLabel.position = CGPoint(x: size.width / 2, y: size.height - 80)
         scoreLabel.zPosition = 1
         
         addChild(scoreLabel)

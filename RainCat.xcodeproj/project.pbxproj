@@ -62,7 +62,7 @@
 		ADFEB0F52A88BEC900385C3F /* SoundManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundManager.swift; sourceTree = "<group>"; };
 		ADFEB0F82A8A151D00385C3F /* Pixel Digivolve.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pixel Digivolve.otf"; sourceTree = "<group>"; };
 		ADFEB0F92A8A152A00385C3F /* Pixel Digivolve Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pixel Digivolve Italic.otf"; sourceTree = "<group>"; };
-		ADFEB0FD2A8A1A9400385C3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		ADFEB0FD2A8A1A9400385C3F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ADFEB0FE2A8A1D6900385C3F /* HUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUD.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -96,7 +96,6 @@
 		ADFEB0B32A861B9D00385C3F /* RainCat */ = {
 			isa = PBXGroup;
 			children = (
-				ADFEB0FD2A8A1A9400385C3F /* Info.plist */,
 				ADFEB0CD2A86337800385C3F /* App */,
 				ADFEB0CF2A86338900385C3F /* Scenes */,
 				ADFEB0D72A866EE100385C3F /* Sprites */,
@@ -129,6 +128,7 @@
 		ADFEB0CD2A86337800385C3F /* App */ = {
 			isa = PBXGroup;
 			children = (
+				ADFEB0FD2A8A1A9400385C3F /* Info.plist */,
 				ADFEB0B42A861B9D00385C3F /* AppDelegate.swift */,
 			);
 			path = App;
@@ -457,7 +457,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = CKY7SLNY4G;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = RainCat/Info.plist;
+				INFOPLIST_FILE = RainCat/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -487,7 +487,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = CKY7SLNY4G;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = RainCat/Info.plist;
+				INFOPLIST_FILE = RainCat/App/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
