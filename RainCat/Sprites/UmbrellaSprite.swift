@@ -39,7 +39,8 @@ class UmbrellaSprite: SKSpriteNode {
     }
     
     public func update(deltaTime: TimeInterval) {
-        let distance = sqrt(pow((destination.x - position.x), 2) + pow((destination.y - position.y), 2)) // Вычисляем гипотенузу по формуле Пифагора
+        // Вычисляем гипотенузу по формуле Пифагора
+        let distance = sqrt(pow((destination.x - position.x), 2) + pow((destination.y - position.y), 2))
         
         if distance > 1 {
             let directionX = (destination.x - position.x)
