@@ -35,7 +35,11 @@ class MenuScene: SKScene {
         
         //Set up sound button
         let edgeMargin : CGFloat = 25
-        soundButton = SKSpriteNode(texture: soundButtonTexture)
+        soundButton = SKSpriteNode(
+            texture: SoundManager.shared.isMuted
+                ? soundButtonOffTexture
+                : soundButtonTexture
+        )
         soundButton.position = CGPoint(
             x: size.width - soundButton.size.width / 2 - edgeMargin,
             y: soundButton.size.height / 2 + edgeMargin
@@ -55,6 +59,86 @@ class MenuScene: SKScene {
         )
         highScoreLabel.zPosition = 1
         addChild(highScoreLabel)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let touch = touches.first {
+            if selectedButton != nil {
+                handleStartButtonHover(isHovering: false)
+                handleSoundButtonHover(isHovering: false)
+            }
+            
+            if startButton.contains(touch.location(in: self)) {
+                selectedButton = startButton
+                handleStartButtonHover(isHovering: true)
+            } else if soundButton.contains(touch.location(in: self)) {
+                selectedButton = soundButton
+                handleSoundButtonHover(isHovering: true)
+            }
+        }
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else { return }
+        
+        // Check which button was clicked (if any)
+        if selectedButton == startButton {
+            handleStartButtonHover(isHovering: (startButton.contains(touch.location(in: self))))
+        } else if selectedButton == soundButton {
+            handleSoundButtonHover(isHovering: (soundButton.contains(touch.location(in: self))))
+        }
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        guard let touch = touches.first else { return }
+        
+        if selectedButton == startButton {
+            // Start button clicked
+            handleStartButtonHover(isHovering: false)
+            
+            if (startButton.contains(touch.location(in: self))) {
+                handleStartButtonClick()
+            }
+            
+        } else if selectedButton == soundButton {
+            // Sound button clicked
+            handleSoundButtonHover(isHovering: false)
+            
+            if (soundButton.contains(touch.location(in: self))) {
+                handleSoundButtonClick()
+            }
+        }
+        
+        selectedButton = nil
+    }
+    
+    
+    
+    /// Handles start button hover behavior
+    func handleStartButtonHover(isHovering : Bool) {
+        startButton.texture = isHovering ? startButtonPressedTexture : startButtonTexture
+    }
+
+    /// Handles sound button hover behavior
+    func handleSoundButtonHover(isHovering : Bool) {
+        soundButton.alpha = isHovering ? 0.5 : 1.0
+    }
+    
+    /// Stubbed out start button on click method
+    func handleStartButtonClick() {
+        let transition = SKTransition.reveal(with: .down, duration: 0.75)
+        let gameScene = GameScene(size: size)
+        gameScene.scaleMode = scaleMode
+        view?.presentScene(gameScene, transition: transition)
+    }
+
+    /// Stubbed out sound button on click method
+    func handleSoundButtonClick() {
+        if SoundManager.shared.toggleMute() {
+            soundButton.texture = soundButtonOffTexture
+        } else {
+            soundButton.texture = soundButtonTexture
+        }
     }
     
 }

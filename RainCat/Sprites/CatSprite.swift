@@ -83,6 +83,10 @@ class CatSprite: SKSpriteNode {
         timeSinceLastHit = 0
         removeAction(forKey: walkingActionKey)
         
+        if SoundManager.shared.isMuted {
+            return
+        }
+        
         if currentRainHits < maxRainHits {
             currentRainHits += 1
             
